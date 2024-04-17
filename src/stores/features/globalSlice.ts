@@ -1,11 +1,12 @@
-import { atom } from 'recoil';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
 
 import settings from '@/config/settings';
 
 import { Theme, NavMode } from '@/@types/settings.d';
 import { TabNavItem } from '@/@types/router.d';
+import { RootState } from '..';
 
-export interface StateType {
+export interface CurrentGlobal {
   /* 以下是针对所有 Layout 扩展字段 */
   // 左侧展开收起
   collapsed: boolean;
@@ -25,7 +26,7 @@ export interface StateType {
   navMode: NavMode;
 }
 
-const initialState: StateType = {
+const initialState: CurrentGlobal = {
   collapsed: false,
   headFixed: settings.headFixed,
   theme: settings.theme,
@@ -35,7 +36,27 @@ const initialState: StateType = {
   navMode: settings.navMode,
 };
 
-export const globalState = atom({
-  key: 'globalState',
-  default: initialState,
+export const globalSlice = createSlice({
+	name: 'global',
+	initialState: initialState,
+	reducers: {
+		setGlobal: (state: CurrentGlobal, action: PayloadAction<Partial<CurrentGlobal>>) => {
+			const { payload } = action;
+			if (typeof payload === 'object') {
+        Object.keys(payload).forEach((key: string) => {
+          // @ts-ignore
+          state[key] = payload[key];
+        });
+      }
+		}
+	}
 });
+
+// 导出actions
+export const { setGlobal } = globalSlice.actions;
+
+// 导出selector
+export const globalSelector = (state: RootState) => state.global;
+
+// 导出reducer
+export default globalSlice.reducer;

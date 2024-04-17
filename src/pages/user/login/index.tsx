@@ -2,8 +2,6 @@ import { memo, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { Alert, Button, Form, Input, message } from 'antd';
 
-import { useRecoilValue } from 'recoil';
-import { useI18n } from '@/store/i18n';
 import locales from './locales';
 
 import IconSvg from '@/components/IconSvg';
@@ -14,12 +12,15 @@ import { LoginParamsType, LoginResponseData } from './data.d';
 import { accountLogin } from './service';
 
 import style from './index.module.less';
+import { useAppSelector } from '@/stores';
+// import { currentI18nSelector } from '@/stores/features/i18nSlice';
+import { useTranslation } from "react-i18next";
 
 export default memo(() => {
   const navigate = useNavigate();
 
-  const t = useRecoilValue(useI18n(locales));
-
+  // const t = useAppSelector(currentI18nSelector(locales));
+  const { t } = useTranslation();
   const [loginStatus, setLoginStatus] = useState<string>('');
   const [submitLoading, setSubmitLoading] = useState<boolean>(false);
   // 登录

@@ -3,7 +3,7 @@
  * @author LiQingSong
  */
 
-import React, { lazy, memo, Suspense } from 'react';
+import React, { memo, Suspense } from 'react';
 import { useLocation, useRoutes } from 'react-router-dom';
 import { createUseRoutes, pathKeyCreateUseRoutes } from '@/utils/router';
 
@@ -23,6 +23,8 @@ import UniversalLayout from '@/layouts/UniversalLayout';
 import UserLayoutRoutes from '@/layouts/UserLayout/routes';
 import UserLayout from '@/layouts/UserLayout';
 
+import ReactLazilyComponent from 'react-lazily-component';
+
 /**
  * 配置所有路由
  */
@@ -39,7 +41,7 @@ const routes = createUseRoutes([
   },
   {
     path: '*',
-    component: lazy(() => import('@/pages/404')),
+    component: ReactLazilyComponent(() => import('@/pages/404')),
   },
 ]);
 
@@ -50,6 +52,8 @@ const layoutToRoutes = {
   UniversalLayout: pathKeyCreateUseRoutes([routes[0]]),
   UserLayout: pathKeyCreateUseRoutes([routes[1]]),
 };
+
+console.log("layoutToRoutes=", layoutToRoutes);
 
 export const SuspenseLazy = memo(({ children }: { children: React.ReactNode }) => (
   <Suspense fallback={<PageLoading />}>{children}</Suspense>

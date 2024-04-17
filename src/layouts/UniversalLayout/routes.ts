@@ -3,7 +3,8 @@
  * @author LiQingSong
  */
 
-import { lazy } from 'react';
+// import { lazy } from 'react';
+import ReactLazilyComponent from 'react-lazily-component';
 import { IRouter } from '@/@types/router.d';
 
 const universalLayoutRotes: IRouter[] = [
@@ -31,7 +32,7 @@ const universalLayoutRotes: IRouter[] = [
           icon: 'control',
           title: 'universal-layout.menu.home.workplace',
         },
-        component: lazy(() => import('@/pages/Home')),
+        component: ReactLazilyComponent(() => import('@/pages/Home')),
       },
       {
         path: 'custombreadcrumbs',
@@ -59,7 +60,7 @@ const universalLayoutRotes: IRouter[] = [
             }
           },
         },
-        component: lazy(() => import('@/pages/CustomBreadcrumbs')),
+        component: ReactLazilyComponent(() => import('@/pages/CustomBreadcrumbs')),
       },
       {
         path: 'http://admin-antd-react.liqingsong.cc/',
@@ -92,7 +93,7 @@ const universalLayoutRotes: IRouter[] = [
             meta: {
               title: 'universal-layout.menu.component.icon.svg',
             },
-            component: lazy(() => import('@/pages/component/icon/svg')),
+            component: ReactLazilyComponent(() => import('@/pages/component/icon/svg')),
           },
         ],
       },
@@ -109,14 +110,14 @@ const universalLayoutRotes: IRouter[] = [
             meta: {
               title: 'universal-layout.menu.component.editor.tui-editor',
             },
-            component: lazy(() => import('@/pages/component/editor/TuiEditor')),
+            component: ReactLazilyComponent(() => import('@/pages/component/editor/TuiEditor')),
           },
           {
             path: 'ckeditor',
             meta: {
               title: 'universal-layout.menu.component.editor.ckeditor',
             },
-            component: lazy(() => import('@/pages/component/editor/ckeditor')),
+            component: ReactLazilyComponent(() => import('@/pages/component/editor/ckeditor')),
           },
         ],
       },
@@ -143,14 +144,14 @@ const universalLayoutRotes: IRouter[] = [
             meta: {
               title: 'universal-layout.menu.pages.list.basic',
             },
-            component: lazy(() => import('@/pages/pagesample/list/basic')),
+            component: ReactLazilyComponent(() => import('@/pages/pagesample/list/basic')),
           },
           {
             path: 'table',
             meta: {
               title: 'universal-layout.menu.pages.list.table',
             },
-            component: lazy(() => import('@/pages/pagesample/list/table')),
+            component: ReactLazilyComponent(() => import('@/pages/pagesample/list/table')),
           },
           {
             path: 'search',
@@ -164,7 +165,7 @@ const universalLayoutRotes: IRouter[] = [
                 meta: {
                   title: 'universal-layout.menu.pages.list.search.table',
                 },
-                component: lazy(() => import('@/pages/pagesample/list/search/table')),
+                component: ReactLazilyComponent(() => import('@/pages/pagesample/list/search/table')),
               },
             ],
           },
@@ -183,14 +184,14 @@ const universalLayoutRotes: IRouter[] = [
             meta: {
               title: 'universal-layout.menu.pages.form.basic',
             },
-            component: lazy(() => import('@/pages/pagesample/form/basic')),
+            component: ReactLazilyComponent(() => import('@/pages/pagesample/form/basic')),
           },
           {
             path: 'complex',
             meta: {
               title: 'universal-layout.menu.pages.form.complex',
             },
-            component: lazy(() => import('@/pages/pagesample/form/complex')),
+            component: ReactLazilyComponent(() => import('@/pages/pagesample/form/complex')),
           },
         ],
       },
@@ -207,7 +208,7 @@ const universalLayoutRotes: IRouter[] = [
               title: 'universal-layout.menu.pages.detail.basic',
               tabNavType: 'querypath',
             },
-            component: lazy(() => import('@/pages/pagesample/detail/basic')),
+            component: ReactLazilyComponent(() => import('@/pages/pagesample/detail/basic')),
           },
           {
             path: 'module',
@@ -215,7 +216,7 @@ const universalLayoutRotes: IRouter[] = [
               title: 'universal-layout.menu.pages.detail.module',
               tabNavType: 'querypath',
             },
-            component: lazy(() => import('@/pages/pagesample/detail/module')),
+            component: ReactLazilyComponent(() => import('@/pages/pagesample/detail/module')),
           },
           {
             path: 'table',
@@ -223,7 +224,7 @@ const universalLayoutRotes: IRouter[] = [
               title: 'universal-layout.menu.pages.detail.table',
               tabNavType: 'querypath',
             },
-            component: lazy(() => import('@/pages/pagesample/detail/table')),
+            component: ReactLazilyComponent(() => import('@/pages/pagesample/detail/table')),
           },
         ],
       },
@@ -243,7 +244,7 @@ const universalLayoutRotes: IRouter[] = [
           icon: 'detail',
           title: 'universal-layout.menu.roles.all',
         },
-        component: lazy(() => import('@/pages/roles/all')),
+        component: ReactLazilyComponent(() => import('@/pages/roles/all')),
       },
       {
         path: 'user',
@@ -252,7 +253,7 @@ const universalLayoutRotes: IRouter[] = [
           title: 'universal-layout.menu.roles.user',
           roles: ['user'],
         },
-        component: lazy(() => import('@/pages/roles/user')),
+        component: ReactLazilyComponent(() => import('@/pages/roles/user')),
       },
       {
         path: 'test',
@@ -261,7 +262,7 @@ const universalLayoutRotes: IRouter[] = [
           title: 'universal-layout.menu.roles.test',
           roles: ['test'],
         },
-        component: lazy(() => import('@/pages/roles/test')),
+        component: ReactLazilyComponent(() => import('@/pages/roles/test')),
       },
     ],
   },

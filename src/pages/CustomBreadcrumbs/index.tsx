@@ -1,10 +1,12 @@
 import { Card } from 'antd';
-import { useRecoilValue } from 'recoil';
-import { useI18n } from '@/store/i18n';
 import locales from './locales';
+import { useAppSelector } from '@/stores';
+// import { currentI18nSelector } from '@/stores/features/i18nSlice';
+import { useTranslation } from "react-i18next";
 
 function App() {
-  const t = useRecoilValue(useI18n(locales));
+  // const t = useAppSelector(currentI18nSelector(locales));
+  const { t } = useTranslation();
   return (
     <div className='layout-main-conent'>
       <Card>

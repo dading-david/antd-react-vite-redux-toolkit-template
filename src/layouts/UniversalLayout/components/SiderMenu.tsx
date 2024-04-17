@@ -2,8 +2,6 @@ import { memo, useState, useMemo, useLayoutEffect } from 'react';
 import { Menu } from 'antd';
 import { unionWith } from 'lodash';
 
-import { useRecoilValue } from 'recoil';
-import { useI18n } from '@/store/i18n';
 import locales from '../locales';
 
 import { hasPermissionRoles } from '@/utils/router';
@@ -14,6 +12,9 @@ import IconSvg from '@/components/IconSvg';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import { Theme } from '@/@types/settings';
 import { IRouter } from '@/@types/router';
+// import { currentI18nSelector } from '@/stores/features/i18nSlice';
+import { useTranslation } from "react-i18next";
+import { useAppSelector } from '@/stores';
 
 /**
  * 根据 routes: IRouter[] 生成 antd menu:ItemType[] 菜单
@@ -102,7 +103,8 @@ export interface SiderMenuProps {
 
 export default memo(
   ({ menuData, routeItem, userRoles = [], collapsed = false, mode = 'inline', theme = 'dark' }: SiderMenuProps) => {
-    const t = useRecoilValue(useI18n(locales));
+    // const t = useAppSelector(currentI18nSelector(locales));
+    const { t } = useTranslation();
     const selectedKeys = useMemo(() => {
       if (!routeItem) {
         return [];

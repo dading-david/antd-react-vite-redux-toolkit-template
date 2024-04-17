@@ -2,8 +2,6 @@ import React, { useEffect, useState } from 'react';
 import { Card, Table } from 'antd';
 import { ColumnsType, TablePaginationConfig } from 'antd/lib/table';
 
-import { useRecoilValue } from 'recoil';
-import { useI18n } from '@/store/i18n';
 import locales from '../../locales';
 
 import { TableListItem } from './data.d';
@@ -14,6 +12,9 @@ import { PaginationConfig } from '../../data';
 
 import { ResponseData } from '@/utils/request';
 import { articleHitQueryList } from '../../service';
+import { useAppSelector } from '@/stores';
+// import { currentI18nSelector } from '@/stores/features/i18nSlice';
+import { useTranslation } from "react-i18next";
 
 const initPagination = {
   total: 0,
@@ -23,7 +24,8 @@ const initPagination = {
 };
 
 const ArticleHitCard: React.FC = () => {
-  const t = useRecoilValue(useI18n(locales));
+  // const t = useAppSelector(currentI18nSelector(locales));
+  const { t } = useTranslation();
 
   const [loading, setLoading] = useState<boolean>(false);
   const [list, setList] = useState<TableListItem[]>([]);

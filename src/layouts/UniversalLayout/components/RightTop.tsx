@@ -2,8 +2,6 @@ import { memo, Suspense } from 'react';
 import { Link } from 'react-router-dom';
 import classnames from 'classnames';
 
-import { useRecoilState } from 'recoil';
-import { globalState } from '@/store/global';
 import IconSvg from '@/components/IconSvg';
 import BreadCrumbs from '@/components/BreadCrumbs';
 import SelectLang from '@/components/SelectLang';
@@ -17,6 +15,8 @@ import RightTopMessage from './RightTopMessage';
 import Settings from './Settings';
 
 import { IRouter, IPathKeyRouter, BreadcrumbType } from '@/@types/router';
+import { globalSelector, setGlobal } from '@/stores/features/globalSlice';
+import { useAppDispatch, useAppSelector } from '@/stores';
 
 export interface RightTopProps {
   menuData: IRouter[];
@@ -27,10 +27,11 @@ export interface RightTopProps {
 }
 
 export default memo(({ menuData, jsonMenuData, routeItem, userRoles = [], breadCrumbs = [] }: RightTopProps) => {
-  const [global, setGlobal] = useRecoilState(globalState);
+  const global = useAppSelector(globalSelector);
+  const dispatch = useAppDispatch();
 
   const toggleCollapsed = () => {
-    setGlobal({ ...global, collapsed: !global.collapsed });
+    dispatch(setGlobal({ ...global, collapsed: !global.collapsed }))
   };
 
   return (

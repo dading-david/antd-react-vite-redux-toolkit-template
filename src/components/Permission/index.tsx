@@ -1,9 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { Result, Button } from 'antd';
-import { useRecoilValue } from 'recoil';
-import { userState } from '@/store/user';
 import { hasPermissionRoles } from '@/utils/router';
+import { useAppSelector } from '@/stores';
+import { userSelector } from '@/stores/features/userSlice';
 
 const Forbidden = (
   <Result
@@ -25,7 +25,7 @@ export interface ALinkProps {
 }
 
 const Permission: React.FC<ALinkProps> = ({ role, noNode = Forbidden, children }) => {
-  const user = useRecoilValue(userState);
+  const user = useAppSelector(userSelector)
   return hasPermissionRoles(user.roles, role) ? <>{children}</> : <>{noNode}</>;
 };
 

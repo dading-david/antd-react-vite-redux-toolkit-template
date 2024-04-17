@@ -1,11 +1,8 @@
 import { memo, useCallback, useEffect, useMemo, useState, useRef } from 'react';
-import { useLocation, useNavigate, Location } from 'react-router-dom';
+import { useLocation, useNavigate, Location, To } from 'react-router-dom';
 import classnames from 'classnames';
 import { Dropdown, Menu } from 'antd';
 
-import { useRecoilValue, useRecoilState } from 'recoil';
-import { globalState } from '@/store/global';
-import { useI18n } from '@/store/i18n';
 import locales from '../locales';
 
 import settings from '@/config/settings';
@@ -15,6 +12,10 @@ import { equalTabNavRoute } from '@/utils/router';
 import IconSvg from '@/components/IconSvg';
 
 import { IRouter, IPathKeyRouter, TabNavItem } from '@/@types/router';
+import { useAppDispatch, useAppSelector } from '@/stores';
+import { globalSelector, setGlobal } from '@/stores/features/globalSlice';
+// import { currentI18nSelector } from '@/stores/features/i18nSlice';
+import { useTranslation } from "react-i18next";
 
 export interface RightTabNavProps {
   jsonMenuData: IPathKeyRouter;
@@ -25,7 +26,8 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const t = useRecoilValue(useI18n(locales));
+  // const t = useAppSelector(currentI18nSelector(locales));
+  const { t } = useTranslation();
 
   // tabNav 下标
   const [tabNavIndex, setTabNavIndex] = useState<number>(0);
@@ -89,21 +91,17 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
   };
 
   /* 其他操作 */
-  const [global, setGlobal] = useRecoilState(globalState);
+  const global = useAppSelector(globalSelector);
+  const dispatch = useAppDispatch();
   const tabNavList = useMemo(() => global.headTabNavList, [global]);
 
   // 设置state global navList
   const setGlobalHeadTabNavList = useCallback(
     (val: (currVal: typeof global) => TabNavItem[]) => {
-      setGlobal((preVal) => {
-        const navList = val(preVal);
-        return {
-          ...preVal,
-          headTabNavList: [...navList],
-        };
-      });
+      const navList = val(global);
+      dispatch(setGlobal({...global, headTabNavList: [...navList]}));
     },
-    [global, setGlobal],
+    [dispatch, global, setGlobal],
   );
 
   // 设置TabNav
@@ -115,7 +113,7 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
     let index = 0;
     setGlobalHeadTabNavList((val) => {
       // 数组里是否已经存在当前route规则，不存在下标为-1
-      index = val.headTabNavList.findIndex((item) =>
+      index = val.headTabNavList.findIndex((item: any) =>
         equalTabNavRoute(item.location, location, routeItem?.meta?.tabNavType),
       );
       if (index < 0) {
@@ -164,7 +162,7 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
   // 关闭TabNav左侧和右侧
   const closeTabNavLeftRight = (param: 'left' | 'right'): void => {
     // 获取当前打开tabNav索引
-    const index = tabNavList.findIndex((item) => equalTabNavRoute(location, item.location, item.menu.meta?.tabNavType));
+    const index = tabNavList.findIndex((item: any) => equalTabNavRoute(location, item.location, item.menu.meta?.tabNavType));
 
     // 有关闭回调的和当前打开的和首页和左侧或右侧无法关闭
     const navList: TabNavItem[] = tabNavList.filter(
@@ -182,20 +180,20 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
     // 判断关闭的是否是当前打开的tab
     let isRouterPush: boolean | TabNavItem = false;
     if (equalTabNavRoute(location, item.location, item.menu?.meta?.tabNavType)) {
-      isRouterPush = tabNavList[index - 1];
+      isRouterPush = tabNavList[index - 1] as TabNavItem; // 断言类型为 TabNavItem
     }
-
+  
     // 如果是undefined说明关闭的是当前页面并且只剩最后这一个tab标签了，所以不关闭
-    if (isRouterPush === undefined) {
+    if (isRouterPush === undefined || isRouterPush === false) {
       return;
     }
-
+  
     const navList: TabNavItem[] = tabNavList.filter(
       (item2: TabNavItem) => !equalTabNavRoute(item2.location, item.location, item.menu?.meta?.tabNavType),
     );
     setGlobalHeadTabNavList(() => [...navList]);
-
-    if (isRouterPush !== false) {
+  
+    if (isRouterPush && 'location' in isRouterPush) { // 确保 isRouterPush 是 TabNavItem 类型且有 location 属性
       navigate(isRouterPush.location);
     }
   };
@@ -266,7 +264,7 @@ export default memo(({ jsonMenuData, routeItem }: RightTabNavProps) => {
       </div>
       <div className='middle' ref={scrollBoxRef} onWheel={handleRolling}>
         <div className='tab' ref={scrollContentRef} style={{ transform: `translateX(${translateX}px)` }}>
-          {tabNavList.map((item, index) => (
+          {tabNavList.map((item: any, index: any) => (
             <span
               key={`tab-nav-${index}`}
               className={classnames('item', {

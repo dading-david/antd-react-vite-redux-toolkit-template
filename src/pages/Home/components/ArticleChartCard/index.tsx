@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { Spin, Card, Divider, Row, Col, Tag } from 'antd';
 
-import { useRecoilValue } from 'recoil';
-import { useI18n } from '@/store/i18n';
 import locales from '../../locales';
 
 import IconSvg from '@/components/IconSvg';
@@ -11,10 +9,13 @@ import styles from '../../index.module.less';
 import { ArticleChartDataType } from './data';
 import { ResponseData } from '@/utils/request';
 import { dailynewArticles } from './service';
+import { useAppSelector } from '@/stores';
+// import { currentI18nSelector } from '@/stores/features/i18nSlice';
+import { useTranslation } from "react-i18next";
 
 const ArticleChartCard: React.FC = () => {
-  const t = useRecoilValue(useI18n(locales));
-
+  // const t = useAppSelector(currentI18nSelector(locales));
+  const { t } = useTranslation();
   const [loading, setLoading] = useState<boolean>(false);
   const [visitData, setVisitData] = useState<ArticleChartDataType>({
     total: 0,

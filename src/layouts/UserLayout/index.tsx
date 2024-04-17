@@ -1,8 +1,6 @@
 import { memo, useMemo } from 'react';
 import { /* Outlet, */ useLocation } from 'react-router-dom';
 
-import { useRecoilValue } from 'recoil';
-import { useI18n } from '@/store/i18n';
 import locales from './locales';
 
 import useTitle from '@/hooks/useTitle';
@@ -14,6 +12,9 @@ import { formatRoutes } from '@/utils/router';
 import layoutRotes from './routes';
 
 import './css/index.less';
+import { useAppSelector } from '@/stores';
+// import { currentI18nSelector } from '@/stores/features/i18nSlice';
+import { useTranslation } from "react-i18next";
 
 export interface UserLayoutProps {
   children: React.ReactNode;
@@ -22,7 +23,8 @@ export interface UserLayoutProps {
 export default memo(({ children }: UserLayoutProps) => {
   const location = useLocation();
 
-  const t = useRecoilValue(useI18n(locales));
+  // const t = useAppSelector(currentI18nSelector(locales));
+  const { t } = useTranslation();
 
   // 框架所有菜单路由 与 patch key格式的所有菜单路由
   const routerPathKeyRouter = useMemo(() => formatRoutes(layoutRotes), []);

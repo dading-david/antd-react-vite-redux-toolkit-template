@@ -4,6 +4,9 @@ import react from '@vitejs/plugin-react';
 import { createSvgIconsPlugin } from 'vite-plugin-svg-icons';
 import { viteMockServe } from 'vite-plugin-mock';
 
+// 引入postcss-pxtorem 用于postcss-pxtorem配置
+// import postCssPxToRem from 'postcss-pxtorem'
+
 // https://vitejs.dev/config/
 export default defineConfig(({ command, mode }) => {
   const root = process.cwd();
@@ -73,6 +76,21 @@ export default defineConfig(({ command, mode }) => {
           javascriptEnabled: true,
         },
       },
+      // postcss-pxtorem配置，使px转化为rem (如果需要可放开以下配置代码，并根据需要进行自定义配置)
+      // postcss: {
+      //   plugins: [
+      //     postCssPxToRem({
+      //       rootValue: 192, // 设计稿元素尺寸/10
+      //       unitPrecision: 5,
+      //       propList: ['*'], // 是一个存储哪些将被转换的属性列表，这里设置为['*']全部，假设需要仅对边框进行设置，可以写['*', '!border*']
+      //       selectorBlackList: [], // 则是一个对css选择器进行过滤的数组，比如你设置为['el-']，那所有el-类名里面有关px的样式将不被转换，这里也支持正则写法。
+      //       replace: true,
+      //       mediaQuery: false, // 媒体查询( @media screen 之类的)中不生效
+      //       minPixelValue: 0, // px 绝对值小于 0 的不会被转换
+      //       exclude: /node_modules/i,
+      //     })
+      //   ]
+      // }
     },
   };
 });

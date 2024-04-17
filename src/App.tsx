@@ -1,13 +1,15 @@
 import { memo, useEffect } from 'react';
 import { ConfigProvider } from 'antd';
-import { useRecoilValue } from 'recoil';
-import { antdMessageState, i18nLocaleState } from '@/store/i18n';
 import { setHtmlLang } from '@/utils/i18n';
 import Routes from '@/config/routes';
+import { useAppSelector } from './stores';
+import { antdMessageSelector, i18nLocaleSelector } from './stores/features/i18nSlice';
 
 export default memo(() => {
-  const i18nLocale = useRecoilValue(i18nLocaleState);
-  const antdMessage = useRecoilValue(antdMessageState);
+
+  const i18nLocale = useAppSelector(i18nLocaleSelector);
+
+  const antdMessage = useAppSelector(antdMessageSelector);
 
   useEffect(() => {
     setHtmlLang(i18nLocale);

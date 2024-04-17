@@ -1,20 +1,25 @@
 import { memo, useCallback, useMemo } from 'react';
 import { Dropdown, Menu } from 'antd';
-import { useRecoilState } from 'recoil';
-import { i18nLocaleState } from '@/store/i18n';
 import { setLocale } from '@/utils/i18n';
 
 import IconSvg from '@/components/IconSvg';
 
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 import { I18nKey } from '@/@types/i18n.d';
+import { useAppDispatch, useAppSelector } from '@/stores';
+import { i18nLocaleSelector, i18nSelector, setI18nLocale } from '@/stores/features/i18nSlice';
+import { useTranslation } from 'react-i18next';
 
 export interface SelectLangProps {
   className?: string;
 }
 
 export default memo(({ className }: SelectLangProps) => {
-  const [i18nLocale, setI18nLocale] = useRecoilState(i18nLocaleState);
+  const i18Info = useAppSelector(i18nSelector);
+  const i18nLocale = useAppSelector(i18nLocaleSelector);
+  const dispath = useAppDispatch();
+  const { i18n } = useTranslation();
+
 
   const menuItems = useMemo<ItemType[]>(
     () => [
@@ -43,7 +48,8 @@ export default memo(({ className }: SelectLangProps) => {
   const onMenuClick = useCallback(
     ({ key }: { key: string }) => {
       const lang = key as I18nKey;
-      setI18nLocale(lang);
+      i18n.changeLanguage(lang);
+      dispath(setI18nLocale({...i18Info, i18nLocale: lang}))
       setLocale(lang);
     },
     [i18nLocale, setI18nLocale],

@@ -1,13 +1,13 @@
 import { memo, useCallback, useEffect, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { message } from 'antd';
-import { useRecoilState } from 'recoil';
-import { userState, CurrentUser } from '@/store/user';
 
 import PageLoading from '@/components/PageLoading';
 
 import { ResponseData } from '@/utils/request';
 import { queryCurrent } from '@/services/user';
+import { useAppDispatch, useAppSelector } from '@/stores';
+import { userSelector, setUser, CurrentUser } from '@/stores/features/userSlice';
 
 export interface SecurityLayoutProps {
   children: React.ReactNode;
@@ -15,7 +15,8 @@ export interface SecurityLayoutProps {
 
 export default memo(({ children }: SecurityLayoutProps) => {
   const navigate = useNavigate();
-  const [user, setUser] = useRecoilState(userState);
+  const user = useAppSelector(userSelector);
+  const dispatch = useAppDispatch();
 
   const isLogin = useMemo(() => user.id > 0, [user]);
 
@@ -23,10 +24,7 @@ export default memo(({ children }: SecurityLayoutProps) => {
     try {
       const response: ResponseData<CurrentUser> = await queryCurrent();
       const { data } = response;
-      setUser({
-        ...user,
-        ...data,
-      });
+      dispatch(setUser({...user, ...data}))
     } catch (error: any) {
       console.log('error', error);
       if (error.message && error.message === 'CustomError') {

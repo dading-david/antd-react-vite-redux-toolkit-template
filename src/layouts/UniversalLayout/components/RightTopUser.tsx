@@ -2,28 +2,31 @@ import { memo, useCallback } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Dropdown, Menu } from 'antd';
 
-import { useRecoilState, useRecoilValue } from 'recoil';
-import { userState, initialState } from '@/store/user';
-import { useI18n } from '@/store/i18n';
 import locales from '../locales';
 
 import { removeToken } from '@/utils/localToken';
 
 import IconSvg from '@/components/IconSvg';
+import { useAppDispatch, useAppSelector } from '@/stores';
+import { userSelector, setUser, initialState } from '@/stores/features/userSlice';
+// import { currentI18nSelector } from '@/stores/features/i18nSlice';
+import { useTranslation } from "react-i18next";
 
 export default memo(() => {
-  const t = useRecoilValue(useI18n(locales));
-  const [user, setUser] = useRecoilState(userState);
+  // const t = useAppSelector(currentI18nSelector(locales));
+  const { t } = useTranslation();
+  const user = useAppSelector(userSelector);
+  const dispatch = useAppDispatch();
 
   const navigate = useNavigate();
 
   const onMenuClick = useCallback(
     ({ key }: { key: string }) => {
       if (key === 'logout') {
-        setUser({
+        dispatch(setUser({
           ...user,
           ...initialState,
-        });
+        }))
         removeToken();
         navigate('/user/login', {
           replace: true,

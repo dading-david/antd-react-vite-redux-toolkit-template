@@ -2,10 +2,6 @@ import { memo, useMemo } from 'react';
 import { /* Outlet, */ useLocation } from 'react-router-dom';
 import classnames from 'classnames';
 
-import { useRecoilValue } from 'recoil';
-import { globalState } from '@/store/global';
-import { userState } from '@/store/user';
-import { useI18n } from '@/store/i18n';
 import locales from './locales';
 
 import { formatRoutes, getBreadcrumbRoutes } from '@/utils/router';
@@ -19,6 +15,11 @@ import layoutRotes from './routes';
 import useTitle from '@/hooks/useTitle';
 
 import './css/index.less';
+import { useAppSelector } from '@/stores';
+import { globalSelector } from '@/stores/features/globalSlice';
+import { userSelector } from '@/stores/features/userSlice';
+// import { currentI18nSelector } from '@/stores/features/i18nSlice';
+import { useTranslation } from "react-i18next";
 
 export interface UniversalLayoutProps {
   children: React.ReactNode;
@@ -26,10 +27,10 @@ export interface UniversalLayoutProps {
 
 export default memo(({ children }: UniversalLayoutProps) => {
   const location = useLocation();
-
-  const t = useRecoilValue(useI18n(locales));
-  const global = useRecoilValue(globalState);
-  const user = useRecoilValue(userState);
+  // const t = useAppSelector(currentI18nSelector(locales));
+  const { t } = useTranslation();
+  const global = useAppSelector(globalSelector);
+  const user = useAppSelector(userSelector);
 
   // 框架所有菜单路由 与 patch key格式的所有菜单路由
   const routerPathKeyRouter = useMemo(() => formatRoutes(layoutRotes), []);

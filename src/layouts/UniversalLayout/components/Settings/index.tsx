@@ -2,41 +2,41 @@ import { memo } from 'react';
 import { Popover, Divider, Switch } from 'antd';
 import classnames from 'classnames';
 
-import { useRecoilState } from 'recoil';
-import { globalState } from '@/store/global';
-
 import IconSvg from '@/components/IconSvg';
 
 import { Theme, NavMode } from '@/@types/settings';
 
 import style from './index.module.less';
+import { useAppDispatch, useAppSelector } from '@/stores';
+import { globalSelector, setGlobal } from '@/stores/features/globalSlice';
 
 export default memo(() => {
-  const [global, setGlobal] = useRecoilState(globalState);
+  const global = useAppSelector(globalSelector);
+  const dispatch = useAppDispatch();
 
   // 模板主题
   const setTheme = (theme: Theme) => {
-    setGlobal({ ...global, theme });
+    dispatch(setGlobal({ ...global, theme }))
   };
 
   // 导航模式
   const setNavMode = (navMode: NavMode) => {
-    setGlobal({ ...global, navMode });
+    dispatch(setGlobal({ ...global, navMode }))
   };
 
   // 固定头部
   const onChangeHeadFixed = () => {
-    setGlobal({ ...global, headFixed: !global.headFixed });
+    dispatch(setGlobal({ ...global, headFixed: !global.headFixed }))
   };
 
   // tabNavEnable
   const onChangeTabNavEnable = () => {
-    setGlobal({ ...global, tabNavEnable: !global.tabNavEnable });
+    dispatch(setGlobal({ ...global, tabNavEnable: !global.tabNavEnable }))
   };
 
   // 固定左侧
   const onChangeLeftSiderFixed = () => {
-    setGlobal({ ...global, leftSiderFixed: !global.leftSiderFixed });
+    dispatch(setGlobal({ ...global, leftSiderFixed: !global.leftSiderFixed }))
   };
   return (
     <Popover
