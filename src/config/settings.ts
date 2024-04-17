@@ -1,6 +1,6 @@
 /**
  * 站点配置
- * @author LiQingSong
+ * 
  */
 import { SettingsType } from '@/@types/settings.d';
 

@@ -1,6 +1,6 @@
 /**
  * 静态资源 ts定义
- * @author LiQingSong
+ * 
  */
 
 declare module '*.avif' {

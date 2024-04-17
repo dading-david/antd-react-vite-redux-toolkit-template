@@ -9,7 +9,7 @@ export const defaultLang: I18nKey = 'zh-CN';
 /**
  * 验证语言命名规则 zh-CN
  * @returns boolen
- * @author LiQingSong
+ * 
  */
 export const localeNameExp = (lang: string): boolean => {
   const localeExp = /^([a-z]{2})-?([A-Z]{2})?$/;
@@ -19,7 +19,7 @@ export const localeNameExp = (lang: string): boolean => {
 /**
  * 设置 html lang 属性值
  * @param lang 语言的 I18nKey
- * @author LiQingSong
+ * 
  */
 export const setHtmlLang = (lang: I18nKey) => {
   /**
@@ -34,7 +34,7 @@ export const setHtmlLang = (lang: I18nKey) => {
 /**
  * 获取当前选择的语言
  * @returns string
- * @author LiQingSong
+ * 
  */
 export const getLocale = (): I18nKey => {
   const lang = typeof window.localStorage !== 'undefined' ? window.localStorage.getItem(localeKey) : '';
@@ -47,7 +47,7 @@ export const getLocale = (): I18nKey => {
  * 切换语言
  * @param lang 语言的 I18nKey
  * @param realReload 是否刷新页面，默认刷新
- * @author LiQingSong
+ * 
  */
 export const setLocale = (lang: I18nKey, realReload?: boolean, callback?: Function) => {
   if (lang !== undefined && !localeNameExp(lang)) {

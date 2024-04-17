@@ -1,6 +1,6 @@
 /**
  * 站点配置 ts定义
- * @author LiQingSong
+ * 
  */
 
 export type Theme = 'dark' | 'light';

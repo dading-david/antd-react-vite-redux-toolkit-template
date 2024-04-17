@@ -1,6 +1,6 @@
 /**
  * 路由工具
- * @author LiQingSong
+ * 
  */
 
 import { createElement } from 'react';
@@ -23,7 +23,7 @@ import {
  * @param configRoutes IRouter[] config配置的路由
  * @param parentPath  string 上级path
  * @returns RouteObject[]
- * @author LiQingSong
+ * 
  */
 export const createUseRoutes = (configRoutes: IRouter[], parentPath = '/'): RouteObject[] => {
   const routes: RouteObject[] = [];
@@ -69,7 +69,7 @@ export const createUseRoutes = (configRoutes: IRouter[], parentPath = '/'): Rout
  * createUseRoutes处理后的数据转成 IPathKeyRouteObject 格式
  * @param routes  RouteObject[] 经过 createUseRoutes 处理后的routes
  * @returns IPathKeyRouteObject
- * @author LiQingSong
+ * 
  */
 export const pathKeyCreateUseRoutes = (routes: RouteObject[]): IPathKeyRouteObject => {
   let jsonItems: IPathKeyRouteObject = {};
@@ -92,7 +92,7 @@ export const pathKeyCreateUseRoutes = (routes: RouteObject[]): IPathKeyRouteObje
  * @param parentPath string 上级path
  * @param parentPaths string[] 父级数组集合
  * @returns IRouterPathKeyRouter
- * @author LiQingSong
+ * 
  */
 export const formatRoutes = (routes: IRouter[], parentPath = '/', parentPaths: string[] = []): IRouterPathKeyRouter => {
   const items: IRouter[] = [];
@@ -151,7 +151,7 @@ export const formatRoutes = (routes: IRouter[], parentPath = '/', parentPaths: s
  * @param userRoles string[] 用户的权限
  * @param roles string | string[] 自定义验证的权限名
  * @returns boolean
- * @author LiQingSong
+ * 
  */
 export const hasPermissionRoles = (userRoles: string[], roles?: string | string[]): boolean => {
   if (userRoles.length < 1) {
@@ -186,7 +186,7 @@ export const hasPermissionRoles = (userRoles: string[], roles?: string | string[
  * @param pathname string[] 路由path数组
  * @param jsonRoutesData IPathKeyRouter 经过formatRoutes处理，框架的所有pathKeyRouter路由
  * @returns IRouter[]
- * @author LiQingSong
+ * 
  */
 export const getPathsTheRoutes = (pathname: string[], jsonRoutesData: IPathKeyRouter): IRouter[] => {
   const routeItem: IRouter[] = [];
@@ -207,7 +207,7 @@ export const getPathsTheRoutes = (pathname: string[], jsonRoutesData: IPathKeyRo
  * @param pathname string 当前路由path
  * @param jsonRoutesData  IPathKeyRouter  IPathKeyRouter 经过formatRoutes处理，框架的所有pathKeyRouter路由
  * @returns BreadcrumbType[]
- * @author LiQingSong
+ * 
  */
 export const getBreadcrumbRoutes = (pathname: string, jsonRoutesData: IPathKeyRouter): BreadcrumbType[] => {
   const route: IRouter = jsonRoutesData[pathname] || {};

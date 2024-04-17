@@ -1,6 +1,6 @@
 /**
  * 路由 ts定义
- * @author LiQingSong
+ * 
  */
 import { Location, RouteObject } from 'react-router-dom';
 

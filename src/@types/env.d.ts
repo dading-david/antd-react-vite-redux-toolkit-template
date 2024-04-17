@@ -1,6 +1,6 @@
 /**
  * 环境变量 ts定义
- * @author LiQingSong
+ * 
  */
 
 /// <reference types="vite/client" />

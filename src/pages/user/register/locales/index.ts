@@ -1,6 +1,6 @@
 /**
  * register locale 入口
- * @author LiQingSong
+ * 
  */
 import { I18n } from '@/@types/i18n.d';
 
