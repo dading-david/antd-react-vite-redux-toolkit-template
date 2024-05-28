@@ -2,8 +2,6 @@ import { memo, useMemo } from 'react';
 import { /* Outlet, */ useLocation } from 'react-router-dom';
 import classnames from 'classnames';
 
-import locales from './locales';
-
 import { formatRoutes, getBreadcrumbRoutes } from '@/utils/router';
 
 import Permission from '@/components/Permission';
@@ -18,7 +16,6 @@ import './css/index.less';
 import { useAppSelector } from '@/stores';
 import { globalSelector } from '@/stores/features/globalSlice';
 import { userSelector } from '@/stores/features/userSlice';
-// import { currentI18nSelector } from '@/stores/features/i18nSlice';
 import { useTranslation } from "react-i18next";
 
 export interface UniversalLayoutProps {
@@ -27,7 +24,6 @@ export interface UniversalLayoutProps {
 
 export default memo(({ children }: UniversalLayoutProps) => {
   const location = useLocation();
-  // const t = useAppSelector(currentI18nSelector(locales));
   const { t } = useTranslation();
   const global = useAppSelector(globalSelector);
   const user = useAppSelector(userSelector);

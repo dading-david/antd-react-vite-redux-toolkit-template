@@ -13,36 +13,49 @@
   "page.home.workschartcard.card-title": "作品",
   "page.home.topicschartcard.card-title": "專題",
   "page.home.linkschartcard.card-title": "左鄰右舍",
-
   "page.home.hotsearchcard.card-title": "熱門搜索",
   "page.home.hotsearchcard.card.table-column-number": "序號",
   "page.home.hotsearchcard.card.table-column-name": "關鍵詞",
   "page.home.hotsearchcard.card.table-column-hit": "次數",
-
   "page.home.hottagscard.card-title": "熱門標簽",
   "page.home.hottagscard.card.table-column-number": "序號",
   "page.home.hottagscard.card.table-column-name": "標簽",
   "page.home.hottagscard.card.table-column-hit": "次數",
-
   "page.home.articlehitcard.card-title": "隨筆瀏覽量排行",
   "page.home.articlehitcard.card.table-column-number": "序號",
   "page.home.articlehitcard.card.table-column-title": "標題",
   "page.home.articlehitcard.card.table-column-hit": "瀏覽量",
-
   "page.home.workshitcard.card-title": "作品瀏覽量排行",
   "page.home.workshitcard.card.table-column-number": "序號",
   "page.home.workshitcard.card.table-column-title": "標題",
   "page.home.workshitcard.card.table-column-hit": "瀏覽量",
-
+  "page.user.login.form-item-username": "用戶名: admin or test or user",
+  "page.user.login.form-item-username.required": "請輸入用戶名",
+  "page.user.login.form-item-password": "密碼: 123456",
+  "page.user.login.form-item-password.required": "請輸入密碼",
+  "page.user.login.form.title": "賬戶登錄",
+  "page.user.login.form.btn-submit": "登錄",
+  "page.user.login.form.btn-jump": "還沒有賬戶？現在註冊！",
+  "page.user.login.form.login-error": "用戶名或密碼錯誤！",
+  "page.user.login.form.login-success": "登錄成功！",
+  "page.custom-breadcrumbs.msg": "請看上方面包屑。",
+  "page.user.register.form-item-username": "用戶名",
+  "page.user.register.form-item-username.required": "請輸入用戶名",
+  "page.user.register.form-item-password": "密碼",
+  "page.user.register.form-item-password.required": "請輸入密碼",
+  "page.user.register.form-item-confirmpassword": "確認密碼",
+  "page.user.register.form-item-confirmpassword.compare": "您輸入的兩個密碼不匹配！",
+  "page.user.register.form.title": "註冊賬戶",
+  "page.user.register.form.btn-submit": "註冊",
+  "page.user.register.form.btn-jump": "已有賬戶？現在登錄！",
+  "page.user.register.form.register-success": "註冊成功，請登錄！",
   "universal-layout.topmenu.userinfo": "個人信息",
   "universal-layout.topmenu.logout": "退出",
-
   "universal-layout.menu.home": "首頁",
   "universal-layout.menu.home.workplace": "工作臺",
   "universal-layout.menu.home.custom-breadcrumbs": "自定義面包屑",
   "universal-layout.menu.home.custom-breadcrumbs.liqingsong.cc": "liqingsong.cc",
   "universal-layout.menu.home.docs": "使用文檔",
-
   "universal-layout.menu.component": "組件",
   "universal-layout.menu.component.icon": "圖標",
   "universal-layout.menu.component.icon.svg": "IconSvg",
@@ -50,7 +63,6 @@
   "universal-layout.menu.component.editor": "編輯器",
   "universal-layout.menu.component.editor.tui-editor": "tui-editor",
   "universal-layout.menu.component.editor.ckeditor": "CKEditor",
-
   "universal-layout.menu.pages": "頁面示例",
   "universal-layout.menu.pages.list": "列表頁面",
   "universal-layout.menu.pages.list.basic": "標淮列表",
@@ -65,12 +77,10 @@
   "universal-layout.menu.pages.detail.basic": "基礎詳情",
   "universal-layout.menu.pages.detail.module": "模塊詳情",
   "universal-layout.menu.pages.detail.table": "表格詳情",
-
   "universal-layout.menu.roles": "權限驗證",
   "universal-layout.menu.roles.all": "用戶都有權限",
   "universal-layout.menu.roles.user": "Users有權限",
   "universal-layout.menu.roles.test": "Tests有權限",
-
   "user-layout.menu.login": "登錄",
   "user-layout.menu.register": "註冊"
 }
